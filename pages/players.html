@@ -1,54 +1,29 @@
  <!-- HEADER -->     
-                  <div class="line">
-                     <section>
+ <div class="line">
+   <section>
     <h2>Global Rankings</h2>
     <p><small>As of 10/23/2015</small></p>
     <article class="line">
-      <!-- get top 10 from mysql database -->
-      <?php
-      require_once('../../mysql_connect.php');
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Tag</th>
+            <th>Elo</th>
+          </tr>
+        </thead>
 
-      $query = "SELECT name, elo FROM elo_players ORDER BY elo DESC";
-      $response = @mysqli_query($dbc, $query);
+        <tbody>
+          <tr ng-repeat="player in players">
+            <td>{{$index + 1}}</td>
+            <td><a ng-href="#/data/{{player.name}}"><u>{{player.name}}</u></a></td>
+            <td>{{player.elo}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-      if($response){
 
-        echo '
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Tag</th>
-              <th>Elo</th>
-            </tr>
-          </thead><tbody>';
-
-          $global_rank = 1;
-          while($row = mysqli_fetch_array($response)){
-
-            echo '<tr>
-            <td>' . $global_rank++ . '.</td>
-            <td>' . '<a href=#/data/' . urlencode($row['name']) . '><u>' . $row['name'] . '</u></a>' . '</td>
-            <td>' . $row['elo'] . '</td>';
-
-            echo '</tr>';
-
-          }
-
-          echo '</tobdy></table>';
-
-        } else {
-
-          echo "Couldn't issue database query<br />";
-
-          echo mysqli_error($dbc);
-
-        }
-
-        mysqli_close($dbc);
-
-        ?>
-</article>
-                     </section>
-                  </div>
+    </article>
+  </section>
+</div>
 <!-- end content -->
