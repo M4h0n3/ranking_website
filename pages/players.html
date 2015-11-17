@@ -2,7 +2,10 @@
  <div class="line">
    <section>
     <h2>Global Rankings</h2>
-    <p><small>As of 10/23/2015</small></p>
+    <br>
+    <input class="s-12 l-4" type="text" ng-model="search_string" placeholder="Search for Player"></div>
+    <br>
+
     <article class="line">
       <table>
         <thead>
@@ -14,7 +17,7 @@
         </thead>
 
         <tbody>
-          <tr ng-repeat="player in players">
+          <tr ng-repeat="player in players | filter:search_string">
             <td>{{$index + 1}}</td>
             <td><a ng-href="#/data/{{player.name}}"><u>{{player.name}}</u></a></td>
             <td>{{player.elo}}</td>
