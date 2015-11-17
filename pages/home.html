@@ -1,76 +1,53 @@
 <!-- HEADER -->     
-                  
-                  <section>
-                     <article class="line">
-                        <div class="margin">
-                           <div class="s-12 m-12 l-2 date">
-                              <i class="icon-calendar"></i>
-                              <p><span>24</span><br />October</p>
-                           </div>
-                           <div class="s-12 m-12 l-10">
-                              <h2>Top Ten Smashers</h2>
-      <?php
-      require_once('../../mysql_connect.php');
 
-      $query = "SELECT name, elo FROM elo_players ORDER BY elo DESC LIMIT 10";
-      $response = @mysqli_query($dbc, $query);
+<section>
+ <article class="line">
+  <div class="margin">
+   <div class="s-12 m-12 l-2 date">
+    <i class="icon-calendar"></i>
+    <p><span>24</span><br />October</p>
+  </div>
+  <div class="s-12 m-12 l-10">
+    <h2>Top Ten Smashers</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Tag</th>
+          <th>Elo</th>
+        </tr>
+      </thead>
 
-      if($response){
+      <tbody>
+        <tr ng-repeat="player in players | limitTo: 10">
+          <td>{{$index + 1}}</td>
+          <td><a ng-href="#/data/{{player.name}}"><u>{{player.name}}</u></a></td>
+          <td>{{player.elo}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-        echo '
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Tag</th>
-              <th>Elo</th>
-            </tr>
-          </thead><tbody>';
 
-          $global_rank = 1;
-          while($row = mysqli_fetch_array($response)){
-
-            echo '<tr>
-            <td>' . $global_rank++ . '.</td>
-            <td>' . '<a href=#/data/' . urlencode($row['name']) . '><u>' . $row['name'] . '</u></a>' . '</td>
-            <td>' . $row['elo'] . '</td>';
-
-            echo '</tr>';
-
-          }
-
-          echo '</tobdy></table>';
-
-        } else {
-
-          echo "Couldn't issue database query<br />";
-
-          echo mysqli_error($dbc);
-
-        }
-
-        mysqli_close($dbc);
-
-        ?>
-        <br />
-                     <hr>
-                  </div>
-               </div>
-            </article>
-            <article class="line">
-               <div class="margin">
-                  <div class="s-12 m-12 l-2 date">
-                     <i class="icon-calendar"></i>
-                     <p><span>24</span><br />October</p>
-                  </div>
-                  <div class="s-12 m-12 l-10">
-                     <h2>Featured Player - Leffen</h2>
-                     <img src="img/leffen.jpg" alt="" />
-                     <br/>
-                     <p>Leffen is a professional Smasher from Stockholm, Sweden. He started off as a Falco main, but later switched to Fox, and is now known as one of the most technical and powerful Fox mains in the world. He places very well in tournaments, consistently placing within the top 3 at even the largest tournaments in the world. He is currently ranked 2nd on the European Melee Power Rankings, and is considered to be one of the six best players in the world along with Armada and the four top players in the United States: PPMD, Mango, Mew2King, and Hungrybox (the five latter are known as The Five Gods), with many ranking him as high as at least Top 3. He is also the only player in competitive Melee history to have taken sets off of each of the Five Gods.
-                     </p>
-                     <hr>
-                  </div>
-               </div>
-            </article>
-         </section>
+    <br />
+    <hr>
+  </div>
+</div>
+</article>
+<article class="line">
+ <div class="margin">
+  <div class="s-12 m-12 l-2 date">
+   <i class="icon-calendar"></i>
+   <p><span>24</span><br />October</p>
+ </div>
+ <div class="s-12 m-12 l-10">
+   <h2>Featured Player - Leffen</h2>
+   <img src="img/leffen.jpg" alt="" />
+   <br/>
+   <p>Leffen is a professional Smasher from Stockholm, Sweden. He started off as a Falco main, but later switched to Fox, and is now known as one of the most technical and powerful Fox mains in the world. He places very well in tournaments, consistently placing within the top 3 at even the largest tournaments in the world. He is currently ranked 2nd on the European Melee Power Rankings, and is considered to be one of the six best players in the world along with Armada and the four top players in the United States: PPMD, Mango, Mew2King, and Hungrybox (the five latter are known as The Five Gods), with many ranking him as high as at least Top 3. He is also the only player in competitive Melee history to have taken sets off of each of the Five Gods.
+   </p>
+   <hr>
+ </div>
+</div>
+</article>
+</section>
