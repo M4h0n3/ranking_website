@@ -1,45 +1,19 @@
 <!-- HEADER -->     
-                  <div class="line">
-                     <section>
-    <h2>Tournaments Used</h2>
-    <article class="line">
-      <?php
-      require_once('../../mysql_connect.php');
-
-      $query = "SELECT DISTINCT tournament FROM elo_matches ORDER BY date";
-      $response = @mysqli_query($dbc, $query);
-
-      if($response){
-
-        echo '<br/>
-        <table>
-          <tbody>';
-
-          while($row = mysqli_fetch_array($response)){
-
-            echo '<tr>
-            <td>' . $row['tournament'] . '</td>';
-
-            echo '</tr>';
-
-          }
-
-          echo '</tbody></table>';
-
-        } else {
-
-          echo "Couldn't issue database query<br />";
-
-          echo mysqli_error($dbc);
-
-        }
-
-        mysqli_close($dbc);
-
-        ?>
-        <p>Note: Evo, FC Smash, and TBH5 results are only from winners since they did not use a conventional double elim bracket. This will be fixed in the near future.</p>
-        <!-- finished getting top 100 from mysql database -->
-      </article>
-                     </section>
-                  </div>
+<div class="line">
+ <section>
+  <h2>Tournaments Used</h2>
+  <article class="line">
+    <br>
+    <table>
+      <tbody>
+        <tr ng-repeat="tournament in tournaments">
+          <td>{{tournament.tournament}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Note: Evo, FC Smash, and TBH5 results are only from winners since they did not use a conventional double elim bracket. This will be fixed in the near future.</p>
+    <!-- finished getting top 100 from mysql database -->
+  </article>
+</section>
+</div>
 <!-- end content -->
