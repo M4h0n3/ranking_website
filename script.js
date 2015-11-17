@@ -24,7 +24,7 @@ var eloApp = angular.module('eloApp', ['ngRoute']);
             })
 
 
-// route for the tournaments page
+            // route for the tournaments page
             .when('/tournaments', {
                 templateUrl : 'pages/tournaments.html',
                 controller  : 'mainController'
@@ -35,10 +35,27 @@ var eloApp = angular.module('eloApp', ['ngRoute']);
                     return 'pages/eloapi.php?player=' + $routeParams.id;
                 },
                 controller  : 'mainController'
+            })
+
+            .otherwise({
+                redirectTo: '/'
             });
         })
 
     // create the controller and inject Angular's $scope
-    eloApp.controller('mainController', function($scope) {});
+    eloApp.controller('mainController', function($scope, $http) {
+
+        $scope.players = [];
+
+        this.getPlayers = function(){
+            $http.get("http://meleeinfo.net/geteloplayers.php")
+            .success(function(data){
+                $scope.players = data;
+            });
+        }
+
+        this.getPlayers();
+
+    });
 
 
