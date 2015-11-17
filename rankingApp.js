@@ -23,12 +23,11 @@ var eloApp = angular.module('eloApp', ['ngRoute']);
                 controller  : 'mainController'
             })
 
-// route for the top100 page
+            // route for the top100 page
             .when('/test', {
-                templateUrl : 'pages/testget.html',
+                templateUrl : 'pages/test.html',
                 controller  : 'mainController'
             })
-
 
             // route for the tournaments page
             .when('/tournaments', {
