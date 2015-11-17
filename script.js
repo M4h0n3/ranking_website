@@ -23,6 +23,12 @@ var eloApp = angular.module('eloApp', ['ngRoute']);
                 controller  : 'mainController'
             })
 
+// route for the top100 page
+            .when('/test', {
+                templateUrl : 'pages/testget.html',
+                controller  : 'mainController'
+            })
+
 
             // route for the tournaments page
             .when('/tournaments', {
@@ -46,6 +52,7 @@ var eloApp = angular.module('eloApp', ['ngRoute']);
     eloApp.controller('mainController', function($scope, $http) {
 
         $scope.players = [];
+        $scope.search_string = '';
 
         this.getPlayers = function(){
             $http.get("http://meleeinfo.net/geteloplayers.php")
